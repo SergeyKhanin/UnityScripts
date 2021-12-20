@@ -6,7 +6,7 @@ public class FlashLight : MonoBehaviour
 {
 
     [Header("Light Settings")]
-    [SerializeField] private Light _source;
+    [SerializeField] private Light _light;
     [SerializeField] private AnimationCurve _intensity;
     private bool _lightControl;
     private bool _lightDelay;
@@ -32,7 +32,7 @@ public class FlashLight : MonoBehaviour
         //_source.enabled = false;
         _lightControl = false;
         _lightDelay = false;
-        _source.intensity = 0.0f;
+        _light.intensity = 0.0f;
     }
     void Update()
     {
@@ -57,7 +57,7 @@ public class FlashLight : MonoBehaviour
         }
         if (_lightControl == true)
         {
-            _source.intensity = _intensity.Evaluate(_currentTime);
+            _light.intensity = _intensity.Evaluate(_currentTime);
             _currentTime = _currentTime + Time.deltaTime;
         }
     }
@@ -70,7 +70,7 @@ public class FlashLight : MonoBehaviour
     void FlashlightOff()
     {
         //_source.enabled = false;
-        _source.intensity = 0.0f;
+        _light.intensity = 0.0f;
         _switcher.transform.Translate(_moveDirection * -_moveStep);
         _glass.GetComponent<MeshRenderer>().material = _lightOff;
     }
