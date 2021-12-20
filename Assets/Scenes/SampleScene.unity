@@ -395,6 +395,10 @@ PrefabInstance:
       propertyPath: _key
       value: 32
       objectReference: {fileID: 0}
+    - target: {fileID: 629383368, guid: 0835482c526d50140895f93bb8d831bc, type: 3}
+      propertyPath: _glass
+      value: 
+      objectReference: {fileID: 1890768950}
     - target: {fileID: 2197743909397917564, guid: 0835482c526d50140895f93bb8d831bc, type: 3}
       propertyPath: m_SpotAngle
       value: 60
@@ -453,6 +457,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0835482c526d50140895f93bb8d831bc, type: 3}
+--- !u!1 &1890768950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6474471991636777107, guid: 0835482c526d50140895f93bb8d831bc, type: 3}
+  m_PrefabInstance: {fileID: 1890768949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class FlashLight : MonoBehaviour
     private float _currentTime;
 
     [Header("Switcher Settings")]
-    [SerializeField] private GameObject _object;
+    [SerializeField] private GameObject _switcher;
     [SerializeField] private Vector3 _moveDirection;
     [SerializeField] private float _moveStep;
     [SerializeField] private AudioSource _audioSource;
@@ -21,6 +21,10 @@ public class FlashLight : MonoBehaviour
     [Header("Control Settings")]
     [SerializeField] private KeyCode _key;
     [SerializeField] private float _delayTime;
+
+    [SerializeField] private GameObject _glass;
+    [SerializeField] private Material _lightOn;
+    [SerializeField] private Material _lightOff;
 
     void Start()
     {
@@ -60,13 +64,15 @@ public class FlashLight : MonoBehaviour
     void FlashlightOn()
     {
         //_source.enabled = true;
-        _object.transform.Translate(_moveDirection * _moveStep);
+        _switcher.transform.Translate(_moveDirection * _moveStep);
+        _glass.GetComponent<MeshRenderer>().material = _lightOn;
     }
     void FlashlightOff()
     {
         //_source.enabled = false;
         _source.intensity = 0.0f;
-        _object.transform.Translate(_moveDirection * -_moveStep);
+        _switcher.transform.Translate(_moveDirection * -_moveStep);
+        _glass.GetComponent<MeshRenderer>().material = _lightOff;
     }
     void PlaySound()
     {

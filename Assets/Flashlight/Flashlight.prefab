@@ -45,8 +45,8 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_SpotAngle: 60
+  m_InnerSpotAngle: 15
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -656,12 +656,15 @@ MonoBehaviour:
     m_PreInfinity: 0
     m_PostInfinity: 0
     m_RotationOrder: 4
-  _object: {fileID: 110360905071426051}
+  _switcher: {fileID: 110360905071426051}
   _moveDirection: {x: 0, y: 1, z: 0}
   _moveStep: 0.0017
   _audioSource: {fileID: 629383369}
-  _key: 102
+  _key: 32
   _delayTime: 0.15
+  _glass: {fileID: 6474471991636777107}
+  _lightOn: {fileID: 2100000, guid: d2ecf61fa0635f64d82f5bfeaf3a1cb0, type: 2}
+  _lightOff: {fileID: 2100000, guid: 2d37b28f465381d43bb3c45053afffeb, type: 2}
 --- !u!1001 &2197743910192222693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -738,6 +741,11 @@ PrefabInstance:
 --- !u!4 &1870485935468344846 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 15345685efeaacc44b9d69a2218edf8b, type: 3}
+  m_PrefabInstance: {fileID: 2197743910192222693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6474471991636777107 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5162820104835090806, guid: 15345685efeaacc44b9d69a2218edf8b, type: 3}
   m_PrefabInstance: {fileID: 2197743910192222693}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &110360905071426051 stripped
