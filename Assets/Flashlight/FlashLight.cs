@@ -18,13 +18,14 @@ public class FlashLight : MonoBehaviour
     [SerializeField] private float _moveStep;
     [SerializeField] private AudioSource _audioSource;
 
-    [Header("Control Settings")]
-    [SerializeField] private KeyCode _key;
-    [SerializeField] private float _delayTime;
-
+    [Header("Glass Settings")]
     [SerializeField] private GameObject _glass;
     [SerializeField] private Material _lightOn;
     [SerializeField] private Material _lightOff;
+
+    [Header("Control Settings")]
+    [SerializeField] private KeyCode _key;
+    [SerializeField] private float _delayTime;
 
     void Start()
     {
@@ -44,7 +45,6 @@ public class FlashLight : MonoBehaviour
                 FlashlightOn();
                 PlaySound();
                 StartCoroutine(Delay());
-
             }
             if (_lightControl == true && _lightDelay == false)
             {
