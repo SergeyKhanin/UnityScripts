@@ -36,6 +36,7 @@ public class FlashLight : MonoBehaviour
     }
     void Update()
     {
+        //if (OVRInput.Get(OVRInput.Button.Two))
         if (Input.GetKeyDown(_key))
         {
             if (_lightControl == false && _lightDelay == false)

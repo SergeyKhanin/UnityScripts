@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2197743910179046237}
   - component: {fileID: 629383369}
-  - component: {fileID: 629383368}
+  - component: {fileID: 582635534494530307}
   m_Layer: 0
   m_Name: Flashlight
   m_TagString: Untagged
@@ -223,7 +223,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &629383368
+--- !u!114 &582635534494530307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d309cfe180bb44cad4da8222de1dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _light: {fileID: 0}
+  _light: {fileID: 2197743909397917564}
   _intensity:
     serializedVersion: 2
     m_Curve:
