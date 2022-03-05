@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+
 public class SetActiveByTime : MonoBehaviour
 {
     [SerializeField] private float _delayTime;
