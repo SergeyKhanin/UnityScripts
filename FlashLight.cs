@@ -1,27 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(AudioSource))]
 public class FlashLight : MonoBehaviour
 {
-
     [Header("Light Settings")]
-    [SerializeField] private Light _light;
-    [SerializeField] private AnimationCurve _intensity;
+    [SerializeField] private Light _lightSourse;
     private bool _lightControl;
     private bool _lightDelay;
     private float _currentTime;
 
     [Header("Switcher Settings")]
-    [SerializeField] private GameObject _switcher;
+    [SerializeField] private GameObject _switcherObject;
     [SerializeField] private Vector3 _moveDirection;
     [SerializeField] private float _moveStep;
-    [SerializeField] private AudioSource _audioSource;
-
-    [Header("Glass Settings")]
-    [SerializeField] private GameObject _glass;
-    [SerializeField] private Material _lightOn;
-    [SerializeField] private Material _lightOff;
+    
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip _audioClip;
+    private AudioSource _audioSource;
+    
+    [Header("Material Settings")]
+    [SerializeField] MeshRenderer _meshLight;
+    [SerializeField] private Material _lightMaterialOn;
+    private Material _lightMaterialOff;
 
     [Header("Control Settings")]
     [SerializeField] private KeyCode _key;
@@ -29,14 +31,13 @@ public class FlashLight : MonoBehaviour
 
     void Start()
     {
-        //_source.enabled = false;
         _lightControl = false;
         _lightDelay = false;
-        _light.intensity = 0.0f;
+        _audioSource = GetComponent<AudioSource>();
+        _lightMaterialOff = _meshLight.GetComponent<MeshRenderer>().material;
     }
     void Update()
     {
-        //if (OVRInput.Get(OVRInput.Button.Two))
         if (Input.GetKeyDown(_key))
         {
             if (_lightControl == false && _lightDelay == false)
@@ -56,24 +57,18 @@ public class FlashLight : MonoBehaviour
                 StartCoroutine(Delay());
             }
         }
-        if (_lightControl == true)
-        {
-            _light.intensity = _intensity.Evaluate(_currentTime);
-            _currentTime = _currentTime + Time.deltaTime;
-        }
     }
     void FlashlightOn()
     {
-        //_source.enabled = true;
-        _switcher.transform.Translate(_moveDirection * _moveStep);
-        _glass.GetComponent<MeshRenderer>().material = _lightOn;
+        _lightSourse.enabled = true;
+        _switcherObject.transform.Translate(_moveDirection * _moveStep);
+        _meshLight.material = _lightMaterialOn;
     }
     void FlashlightOff()
     {
-        //_source.enabled = false;
-        _light.intensity = 0.0f;
-        _switcher.transform.Translate(_moveDirection * -_moveStep);
-        _glass.GetComponent<MeshRenderer>().material = _lightOff;
+        _lightSourse.enabled = false;
+        _switcherObject.transform.Translate(_moveDirection * -_moveStep);
+        _meshLight.material = _lightMaterialOff;
     }
     void PlaySound()
     {
@@ -84,5 +79,12 @@ public class FlashLight : MonoBehaviour
     {
         yield return new WaitForSeconds(_delayTime);
         _lightDelay = false;
+    }
+    private void OnValidate()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.clip = _audioClip;
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 1.0f;
     }
 }
