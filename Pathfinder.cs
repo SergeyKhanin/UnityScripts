@@ -6,7 +6,8 @@ public class Pathfinder : MonoBehaviour
     [Space(10.0f)] 
     [SerializeField] private Transform _waypoints;
     [SerializeField] private Transform _target;
-    [SerializeField] private bool _isRandomWayActive;
+    [SerializeField] private bool _randomWayHasActive;
+    [SerializeField] private bool _randomSpeedHasActive;
     [Space(10.0f)] 
     [SerializeField] private float _speed;
     [Space(10.0f)] 
@@ -26,7 +27,7 @@ public class Pathfinder : MonoBehaviour
 
     private void Start()
     {
-        if (_isRandomWayActive)
+        if (_randomWayHasActive)
             RandomWay();
     }
 
@@ -54,10 +55,9 @@ public class Pathfinder : MonoBehaviour
 
     private void SetPatrol()
     {
-        _speed = _speedTemp;
+        _speed = SpeedChooser();
 
-
-        switch (_isRandomWayActive)
+        switch (_randomWayHasActive)
         {
             case true:
                 if (transform.position == _waypoints.GetChild(_index).position)
@@ -76,7 +76,7 @@ public class Pathfinder : MonoBehaviour
 
     private void SetTarget()
     {
-        _speed = _speedTemp * 2.0f;
+        _speed = SpeedChooser() * 2.0f;
 
         MoveTowards(transform.position, _target.position);
 
@@ -105,5 +105,22 @@ public class Pathfinder : MonoBehaviour
     private void RandomWay()
     {
         _index = Random.Range(0, _waypoints.childCount);
+    }
+
+    private float SpeedChooser()
+    {
+        var speed = 0.0f;
+
+        switch (_randomSpeedHasActive)
+        {
+            case true:
+                speed = Random.Range(_speedTemp / 2.0f, _speedTemp);
+                break;
+            case false:
+                speed = _speedTemp;
+                break;
+        }
+
+        return speed;
     }
 }
