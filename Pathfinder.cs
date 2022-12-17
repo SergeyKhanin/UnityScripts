@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-public class Path : MonoBehaviour
+public class Pathfinder : MonoBehaviour
 {
     [Space(10.0f)] 
     [SerializeField] private Transform _paths;
@@ -30,7 +29,7 @@ public class Path : MonoBehaviour
     private void SetPatrol()
     {
         _speed = _speedTemp;
-        
+
         if (transform.position == _paths.GetChild(_index).position)
             _index++;
         if (_index == _paths.childCount)
@@ -42,7 +41,7 @@ public class Path : MonoBehaviour
     private void SetTarget()
     {
         _speed = _speedTemp * 2.0f;
-        
+
         MoveTowards(transform.position, _target.position);
 
         if (transform.position == _target.position)
