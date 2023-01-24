@@ -4,14 +4,16 @@ public class ChangeAlbedoColorInMaterial : MonoBehaviour
 {
     [SerializeField] private Color _albedoColor;
     [SerializeField] private Material[] _repaintedMaterials;
-    [SerializeField] private string _instancePostfix = " (Instance)";
+
+    private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
+    private const string InstancePostfix = " (Instance)";
 
     private void Start()
     {
-        ChangeAlbedoColor();
+        SetAlbedoColor(_albedoColor);
     }
 
-    private void ChangeAlbedoColor()
+    private void SetAlbedoColor(Color color)
     {
         var meshesRenderer = GetComponentsInChildren<MeshRenderer>();
         foreach (var meshRenderer in meshesRenderer)
@@ -21,10 +23,10 @@ public class ChangeAlbedoColorInMaterial : MonoBehaviour
             {
                 foreach (var repaintedMaterial in _repaintedMaterials)
                 {
-                    var materialName = repaintedMaterial.name + _instancePostfix;
+                    var materialName = repaintedMaterial.name + InstancePostfix;
                     if (material.name == materialName)
                     {
-                        material.SetColor("_BaseColor", _albedoColor);
+                        material.SetColor(BaseColor, color);
                     }
                 }
             }
