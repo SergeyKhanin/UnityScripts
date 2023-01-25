@@ -1,24 +1,36 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeAlbedoColorInMaterial : MonoBehaviour
 {
-    [SerializeField] private Color _albedoColor;
     [SerializeField] private Material[] _repaintedMaterials;
+    [SerializeField] private Color _albedoColor = Color.white;
 
     private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
     private const string InstancePostfix = " (Instance)";
+    private readonly List<Material> _materialsInstancesCash = new List<Material>();
 
-    private void Start()
+    private void OnEnable()
+    {
+        AddInstancesMaterialsToCash();
+    }
+
+    private void OnDisable()
+    {
+        ClearInstancesMaterialsFromCash();
+    }
+
+    private void Update()
     {
         SetAlbedoColor(_albedoColor);
     }
 
-    private void SetAlbedoColor(Color color)
+    private void AddInstancesMaterialsToCash()
     {
         var meshesRenderer = GetComponentsInChildren<MeshRenderer>();
         foreach (var meshRenderer in meshesRenderer)
         {
-            var materials = meshRenderer.GetComponentInChildren<MeshRenderer>().materials;
+            var materials = meshRenderer.GetComponent<MeshRenderer>().materials;
             foreach (var material in materials)
             {
                 foreach (var repaintedMaterial in _repaintedMaterials)
@@ -26,10 +38,23 @@ public class ChangeAlbedoColorInMaterial : MonoBehaviour
                     var materialName = repaintedMaterial.name + InstancePostfix;
                     if (material.name == materialName)
                     {
-                        material.SetColor(BaseColor, color);
+                        _materialsInstancesCash.Add(material);
                     }
                 }
             }
         }
+    }
+
+    private void SetAlbedoColor(Color color)
+    {
+        foreach (var material in _materialsInstancesCash)
+        {
+            material.SetColor(BaseColor, color);
+        }
+    }
+
+    private void ClearInstancesMaterialsFromCash()
+    {
+        _materialsInstancesCash.Clear();
     }
 }
