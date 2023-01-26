@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeAlbedoColorInMaterial : MonoBehaviour
+public class ChangeAlbedoColorInMaterials : MonoBehaviour
 {
     [SerializeField] private Color _albedoColor = Color.white;
     [SerializeField] private Material[] _repaintedMaterials;
@@ -43,16 +43,16 @@ public class ChangeAlbedoColorInMaterial : MonoBehaviour
         }
     }
 
+    private void ClearInstancesMaterialsFromCash()
+    {
+        _materialsInstancesCash.Clear();
+    }
+
     private void SetAlbedoColor(Color color)
     {
         foreach (var material in _materialsInstancesCash)
         {
             material.SetColor(BaseColor, color);
         }
-    }
-
-    private void ClearInstancesMaterialsFromCash()
-    {
-        _materialsInstancesCash.Clear();
     }
 }
