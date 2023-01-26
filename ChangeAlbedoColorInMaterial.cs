@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class ChangeAlbedoColorInMaterial : MonoBehaviour
 {
-    [SerializeField] private Material[] _repaintedMaterials;
     [SerializeField] private Color _albedoColor = Color.white;
+    [SerializeField] private Material[] _repaintedMaterials;
 
     private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
-    private const string InstancePostfix = " (Instance)";
     private readonly List<Material> _materialsInstancesCash = new List<Material>();
 
     private void OnEnable()
@@ -35,8 +34,7 @@ public class ChangeAlbedoColorInMaterial : MonoBehaviour
             {
                 foreach (var repaintedMaterial in _repaintedMaterials)
                 {
-                    var materialName = repaintedMaterial.name + InstancePostfix;
-                    if (material.name == materialName)
+                    if (material.name.StartsWith(repaintedMaterial.name))
                     {
                         _materialsInstancesCash.Add(material);
                     }
